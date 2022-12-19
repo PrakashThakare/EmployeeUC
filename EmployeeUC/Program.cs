@@ -12,13 +12,15 @@ namespace EmployeeUC
         public const int IS_FULL_TIME = 2;
         public const int EPM_RATE_PER_HOUR = 20;
         public const int NUM_OF_WOKING_DAYS = 2;
+        public const int MAX_HOUR_IN_MONTH = 10;
         static void Main(string[] args)
         {
             {
-                int empHrs = 0, empWage = 0, totalEmpWage = 0;
+                int empHrs = 0, totalEmpHrs = 0, totalWorkingdays = 0;
 
-                for (int day = 0; day < NUM_OF_WOKING_DAYS; day++)
+                while (totalEmpHrs <= MAX_HOUR_IN_MONTH && totalWorkingdays < NUM_OF_WOKING_DAYS)
                 {
+                    totalWorkingdays++;
                     Random random = new Random();
                     int empCheck = random.Next(0, 3);
                     switch (empCheck)
@@ -33,11 +35,12 @@ namespace EmployeeUC
                             empHrs = 0;
                             break;
                     }
-                    empWage = empHrs * EPM_RATE_PER_HOUR;
-                    totalEmpWage += empWage;
-                    Console.WriteLine("Emp Wage{0}", empWage);
+                    totalEmpHrs += empHrs;
+
+                    Console.WriteLine("Day# {0} Emp Hrs{1}", totalWorkingdays, empHrs);
                 }
 
+                int totalEmpWage = totalEmpHrs * EPM_RATE_PER_HOUR;
                 Console.WriteLine("Total Emp Wage : {0}", totalEmpWage);
 
                 Console.ReadLine();
